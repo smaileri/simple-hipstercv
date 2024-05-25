@@ -2,19 +2,22 @@
 % https://www.latextemplates.com/template/twenty-seconds-resumecv
 % https://www.latextemplates.com/template/friggeri-resume-cv
 
-\documentclass[lighthipster]{simplehipstercv}
+\documentclass[withoutsidebar]{simplehipstercv}
 % available options are: darkhipster, lighthipster, pastel, allblack, grey, verylight, withoutsidebar
 % withoutsidebar
 \usepackage[utf8]{inputenc}
 \usepackage[default]{raleway}
 \usepackage[margin=1cm, a4paper]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+
 
 
 %------------------------------------------------------------------ Variablen
 
 \newlength{\rightcolwidth}
 \newlength{\leftcolwidth}
-\setlength{\leftcolwidth}{0.23\textwidth}
+\setlength{\leftcolwidth}{0.25\textwidth}
 \setlength{\rightcolwidth}{0.75\textwidth}
 
 %------------------------------------------------------------------
@@ -30,10 +33,15 @@
 %-------------------------------------------------------------
 
 \section*{Start}
+\definecolor{darkgreen}{RGB}{40, 54, 24}
+\definecolor{lightgreen}{RGB}{96, 108, 56}
+\definecolor{lightwhite}{RGB}{254, 250, 224}
+\definecolor{orange}{RGB}{188, 108, 37}
+\definecolor{lightorange}{RGB}{221, 161, 94}
 
-\simpleheader{headercolour}{Jack}{Sparrow}{Captain}{white}
-
-
+%\customheaderSECOND{darkgreen}{Viktor}{Melnikov}{Data Scientist/Engineer +32478089847}{lightorange}
+\simpleheader{darkgreen}{Viktor}{Melnikov}{Data Scientist/Engineer}{lightorange}
+%\customheader{darkgreen}{Viktor}{Melnikov}{Data Scientist/Engineer}{lightorange}{+32478089847}{viktor@dattico.com}{https://smaileri.github.io}
 
 %------------------------------------------------
 
@@ -42,7 +50,7 @@
 \vspace{4em}
 
 \setlength{\columnsep}{1.5cm}
-\columnratio{0.23}[0.75]
+\columnratio{0.25}[0.75]
 \begin{paracol}{2}
 \hbadness5000
 %\backgroundcolor{c[1]}[rgb]{1,1,0.8} % cream yellow for column-1 %\backgroundcolor{g}[rgb]{0.8,1,1} % \backgroundcolor{l}[rgb]{0,0,0.7} % dark blue for left margin
@@ -54,55 +62,64 @@
 
 \footnotesize
 {\setasidefontcolour
-\flushright
+\flushleft
 \begin{center}
-    \roundpic{jack.jpg}
+    \roundpic{"img/viktor.jpeg"}
 \end{center}
 
-\bg{cvgreen}{white}{About me}\\[0.5em]
+\bg{lightgreen}{lightwhite}{About me}\\[0.5em]
 
 {\footnotesize
-\lorem\lorem\lorem}
+A detail-oriented Data Scientist at Dattico with a solid mathematical background and technical skills, I solve complex data challenges using a variety of tools, including cloud services (AWS and Azure). My journey began at Bruxelles Formation, where I engaged deeply in AI/ML projects. I am on my final course to complete the MITx MicroMasters in Statistics and Data Science.
+\\[0.5em]
+
+Proficient in Python and R for comprehensive data analysis and visualization, I am highly skilled in Machine Learning and Deep Learning, with expertise in Numpy, Pandas, Sklearn, and TensorFlow. I have also developed applications in JavaScript and Python and have a working knowledge of R and SQL.
+}
 \bigskip
 
-\bg{cvgreen}{white}{personal} \\[0.5em]
-Jack Sparrow
+\bg{lightgreen}{lightwhite}{Personal} \\[0.5em]
 
-nationality: English 
+nationality: Ukrainian\\[0.5em]
 
-1690
+driving licence: studying\\[0.5em]
 
-\bigskip
-
-\bg{cvgreen}{white}{Areas of specialization} \\[0.5em]
-
-Privateering ~•~ Bucaneering ~•~ Parler ~•~ Rum
-
-\bigskip
-
+work permit: card A, \textbf{no sponsorship required}
 
 
 \bigskip
 
-\bg{cvgreen}{white}{Interests}\\[0.5em]
+\newcommand{\pictofractionONLYFCOLUMN}[4]{%
+    \pgfmathparse{#3 - 1}%
+    \foreach \n in {0,...,\pgfmathresult}{%
+        \icon{#1}{#2}{#4}%
+    }%
+}
 
-\lorem
+
+\bg{lightgreen}{lightwhite}{Languages}\\[0.5em]
+\begin{tabular}{l | ll}
+\textbf{English} & C1 & \pictofractionONLYFCOLUMN{\faCircle}{orange}{5}{\tiny}\\
+\textbf{French} & B1 & \pictofraction{\faCircle}{orange}{3}{black!30}{2}{\tiny} \\
+\textbf{Dutch} & A2 & \pictofraction{\faCircle}{orange}{2}{black!30}{3}{\tiny} \\
+\textbf{Ukrainian} & C2 & {\phantom{x}\footnotesize native} \\
+\textbf{Russian} & C2 & {\phantom{x}\footnotesize native} 
+\end{tabular}
 \bigskip
 
-\bg{cvgreen}{white}{Interests}\\[0.5em]
 
-\texttt{R} ~/~ \texttt{Android} ~/~ \texttt{Linux}
+\bg{lightgreen}{lightwhite}{Interests} \\[0.5em]
 
-\texttt{R} ~/~ \texttt{Android} ~/~ \texttt{Linux}
+Creating math explanation videos ~•~ hiking ~•~ visual art ~•~ playing with home server (Linux OS)
 
-\texttt{R} ~/~ \texttt{Android} ~/~ \texttt{Linux}
+\bigskip
 
 \vspace{4em}
 
-\infobubble{\faAt}{cvgreen}{white}{jack@sparrow.org}
-\infobubble{\faTwitter}{cvgreen}{white}{@sparrow}
-\infobubble{\faFacebook}{cvgreen}{white}{Jack Sparrow}
-\infobubble{\faGithub}{cvgreen}{white}{sparrow}
+\infobubble{\faMapMarker}{lightgreen}{lightwhite}{Antwerpen, 2000}
+
+\infobubble{\faAt}{lightgreen}{lightwhite}{viktor@dattico.com}
+\infobubble{\faPhone}{lightgreen}{lightwhite}{+32/478/089847}
+\infobubble{\faGithub}{lightgreen}{lightwhite}{smaileri}
 
 \phantom{turn the page}
 
@@ -189,13 +206,13 @@ Privateering ~•~ Bucaneering ~•~ Parler ~•~ Rum
 %----------------------------------------------------------------------------------------
 %	FINAL FOOTER
 %----------------------------------------------------------------------------------------
-\setlength{\parindent}{0pt}
-\begin{minipage}[t]{\rightcolwidth}
-\begin{center}\fontfamily{\sfdefault}\selectfont \color{black!70}
-{\small Jack Sparrow \icon{\faEnvelopeO}{cvgreen}{} The Black Pearl \icon{\faMapMarker}{cvgreen}{} Tortuga \icon{\faPhone}{cvgreen}{} 0099/333 5647380 \newline\icon{\faAt}{cvgreen}{} \protect\url{jack@sparrow.com}
-}
-\end{center}
-\end{minipage}
+%\setlength{\parindent}{0pt}
+%\begin{minipage}[t]{\rightcolwidth}
+%\begin{center}\fontfamily{\sfdefault}\selectfont \color{black!70}
+%{\small Jack Sparrow \icon{\faEnvelopeO}{cvgreen}{} The Black Pearl \icon{\faMapMarker}{cvgreen}{} Tortuga \icon{\faPhone}{cvgreen}{} 0099/333 5647380 \newline\icon{\faAt}{cvgreen}{} \protect\url{jack@sparrow.com}
+%}
+%\end{center}
+%\end{minipage}
 
 \end{paracol}
 

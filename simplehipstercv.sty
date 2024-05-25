@@ -1,5 +1,6 @@
 
 \usepackage[T1]{fontenc}
+\usepackage{qrcode}
 
 \usepackage{fontawesome}
 \usepackage{hyperref}
@@ -118,7 +119,9 @@
 
 
 %------------------------------------ pictoFraction
-\newcommand{\icon}[3]{\phantom{x}{#3\color{#2}#1}\phantom{x}}
+%\newcommand{\icon}[3]{\phantom{x}{#3\color{#2}#1}\phantom{x}}
+\newcommand{\icon}[3]{\phantom{x}{#3\color{#2}#1}\!\!\phantom{x}}
+
 %------------------- pictogram Fraction: pictoFraction
 \newcommand{\pictofraction}[6]{%
 \pgfmathparse{#3 - 1}\foreach \n in {0,...,\pgfmathresult}{\icon{#1}{#2}{#6}}%
@@ -188,14 +191,48 @@
 
 % -----------------------------------------------------------------------------------
 
+
 \newcommand{\simpleheader}[5]{
 \tikz[remember picture,overlay] {%
 \node[rectangle, fill=#1, anchor=north, minimum width=\paperwidth, minimum height=3.5cm](header) at (current page.north){};%
 \node[draw=none, align=left](name) at (header) {%
-{\Huge \color{#5} #2 \textbf{#3} }%
+{\Huge \Huge \color{#5} #2 \textbf{#3} }%
 };%
 \node[draw=none, below](description) at (name.south) {\color{white}#4};% 
 }\vspace{-0.7cm}%
+}
+% -----------------------------------------------------------------------------------
+
+\newcommand{\customheader}[8]{
+\tikz[remember picture,overlay]{
+  % Define column widths
+  \newdimen\leftcolwidth
+  \newdimen\midcolwidth
+  \newdimen\rightcolwidth
+  \setlength{\leftcolwidth}{0.6\paperwidth}
+  \setlength{\midcolwidth}{0.25\paperwidth}
+  \setlength{\rightcolwidth}{0.15\paperwidth}
+  
+  % Left column with name, title
+  \node[rectangle, fill=#1, anchor=north east , minimum width=\leftcolwidth, minimum height=3.5cm](leftcol) at (current page.north){};
+  \node[draw=none, align=left](name) at (leftcol.north) {\Huge\color{#5} #2 \textbf{#3}};
+  \node[draw=none, below=1cm](title) at (name.south) {\Huge\textbf{#4}};
+  
+  % Middle column with icons and links (ensure correct icon placement)
+  \node[rectangle, fill=#1, anchor=north, minimum width=\midcolwidth, minimum height=3.5cm](midcol) at (leftcol.east){};
+  \node[draw=none, below=0.3cm](phoneicon) at (midcol.north west) {\scalebox{0.8}{\icon{\faPhone}{cvgreen}{}}};  % Use Font Awesome icon directly
+  \node[draw=none, right=0.2cm](phonenumber) at (phoneicon.east) {\color{#5} #5};
+  \node[draw=none, below=0.5cm](locationicon) at (phoneicon.south) {\scalebox{0.8}{\icon{\faMapMarker}{cvgreen}{}}};  % Use Font Awesome icon directly
+  \node[draw=none, right=0.2cm](location) at (locationicon.east) {\color{#5} \href{#6}{#6}};  % Assuming location is a link
+  \node[draw=none, below=0.5cm](emailicon) at (locationicon.south) {\scalebox{0.8}{\icon{\faEnvelopeO}{cvgreen}{}}};  % Use Font Awesome icon directly
+  \node[draw=none, right=0.2cm](email) at (emailicon.east) {\color{#5} \href{#7}{#7}};
+  
+
+  % Right column with QR code
+%  \node[rectangle, fill=transparent, anchor=north east, minimum width=\rightcolwidth, minimum height=3.5cm](rightcol) at (midcol.east){};
+  %\qrcode{#8};
+}%
+\vspace{-0.7cm}%
 }
 
 
